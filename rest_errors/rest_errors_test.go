@@ -54,6 +54,12 @@ func TestNewUnauthorizedError(t *testing.T) {
 	assert.EqualValues(t, "message: this is the message - status: 401 - error: unauthorized - causes: []", err.Error())
 }
 
+func TestNewRestErrorFromBytes(t *testing.T) {
+	restErr, err := NewRestErrorFromBytes([]byte("some"))
+	assert.Nil(t, restErr)
+	assert.NotNil(t, err)
+}
+
 func TestNewError(t *testing.T) {
 	err := NewError("this is the message")
 	assert.NotNil(t, err)
