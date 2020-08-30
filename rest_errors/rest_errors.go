@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// RestErr is the interface to get access of restErr
 type RestErr interface {
 	Message() string
 	Status() int
@@ -21,19 +22,23 @@ type restErr struct {
 	ErrCauses  []interface{} `json:"causes"`
 }
 
+// Error get the structure of the error
 func (e restErr) Error() string {
 	return fmt.Sprintf("message: %s - status: %d - error: %s - causes: %v",
 		e.ErrMessage, e.ErrStatus, e.ErrError, e.ErrCauses)
 }
 
+// Message get the message description of the error
 func (e restErr) Message() string {
 	return e.ErrMessage
 }
 
+// Status is the StatusCode for the api error
 func (e restErr) Status() int {
 	return e.ErrStatus
 }
 
+// Causes is the list of causes
 func (e restErr) Causes() []interface{} {
 	return e.ErrCauses
 }
